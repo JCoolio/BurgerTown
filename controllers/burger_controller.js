@@ -6,6 +6,10 @@ var db = require('../models');
 
 router.get('/', function (req, res) {
     db.Burger.findAll({
+        // order: { burger_name: 'ASC' },
+        // include: [
+        //     {model: db.Customer, required: false}
+        // ]
     }).then(function (data) {
         var hbsObject = {
             burgers: data
@@ -23,19 +27,20 @@ router.post('/api/new/burger', function (req, res) {
     });
 });
 
-router.put('/api/new/customer/:id', function(req, res) {
+router.put('/api/new/customer/:id', function (req, res) {
     var customerName = req.body.customer_name;
     db.Customer.create({
         customer_name: customerName
-    }).then(function(data) {
+    }).then(function (data) {
         var devoured = true;
         var ID = req.params.id;
 
         db.Burger.update({
             devoured: devoured,
-            CustomerId: data.id},
-            {where: {id: ID}}
-        ).then(function() {
+            CustomerId: data.id
+        },
+            { where: { id: ID } }
+        ).then(function () {
             res.redirect('/');
         });
     });
@@ -46,9 +51,11 @@ router.put('/:id', function (req, res) {
     var ID = req.params.id;
 
     db.Burger.update(
-        {devoured: devoured,
-        CustomerId: null},
-        {where: {id: ID}}
+        {
+            devoured: devoured,
+            CustomerId: null
+        },
+        { where: { id: ID } }
     ).then(function () {
         res.redirect('/');
     });
