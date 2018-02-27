@@ -18,31 +18,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 defaultValue: false
             },
-            createdAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-            },
-            updatedAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-            }
-        },
-        {
-            classMethods: {
-                associate: function(models) {
-                    Burger.belongsTo(models.Customer,
-                        {
-                            onDelete: "cascade",
-                            foreignKey: {
-                                allowNull: true
-                            }
-                        });
 
-                }
-
-            }
         });
 
     

@@ -6,10 +6,6 @@ var db = require('../models');
 
 router.get('/', function (req, res) {
     db.Burger.findAll({
-        order: 'burger_name ASC',
-        include: [
-            {model: db.Customer, required: false}
-        ]
     }).then(function (data) {
         var hbsObject = {
             burgers: data
